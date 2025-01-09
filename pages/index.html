@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Manager</title>
+    <script src="/src/scripts.js" defer></script>
+</head>
+<body>
+    <h1>Video Manager</h1>
+
+    <section>
+        <h2>Adicionar Vídeo</h2>
+        <div>
+            <label for="link">
+                Link:
+                <input type="text" id="link" placeholder="Link do vídeo">
+            </label>
+        </div>
+        <div>
+            <label for="descricao">
+                Descrição:
+                <input type="text" id="descricao" placeholder="Descrição do vídeo">
+            </label>
+        </div>
+        <div>
+            <label for="estado">
+                Estado:
+                <select name="estado" id="estado">
+                    <option value="baixado">baixado</option>
+                    <option value="editado">editado</option>
+                    <option value="postado">postado</option>
+                </select>
+                <!-- <input type="text" id="estado" placeholder="Estado do vídeo"> -->
+            </label>
+        </div>
+        <button onclick="addVideo()">Adicionar Vídeo</button>
+    </section>
+
+    <section>
+        <h2>Baixados</h2>
+        <div id="baixados" class="content"></div>
+    </section>
+    <section>
+        <h2>Editados</h2>
+        <div id="editados" class="content"></div>
+    </section>
+    <section>
+        <h2>Postados</h2>
+        <div id="postados" class="content"></div>
+    </section>
+
+</body>
+</html>
