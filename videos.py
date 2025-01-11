@@ -53,6 +53,7 @@ def update_video(video_id, link=None, descricao=None, estado=None):
     if estado:
         video.estado = estado
     session.commit()
+    session.refresh(video)
     session.close()
     return video
 

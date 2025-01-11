@@ -22,14 +22,33 @@ function createCardVideo({ id, link, descricao, estado}) {
     buttonDelete.onclick = deleteVideo;
     div.appendChild(buttonDelete);
 
+    const buttonAddBaixado = document.createElement("button");
+    buttonAddBaixado.innerHTML = "Mover p/ Baixados";
+    buttonAddBaixado.onclick = () => moveVideoBy(id, "baixado");
+
+    const buttonAddEditado = document.createElement("button");
+    buttonAddEditado.innerHTML = "Mover p/ Editados";
+    buttonAddEditado.onclick = () => moveVideoBy(id, "editado");
+
+    const buttonAddPostado = document.createElement("button");
+    buttonAddPostado.innerHTML = "Mover p/ Postados";
+    buttonAddPostado.onclick = () => moveVideoBy(id, "postado");
+
+
     switch (estado) {
         case "baixado":
+            div.appendChild(buttonAddEditado);
+            div.appendChild(buttonAddPostado);
             sectionBaixados.appendChild(div);
             break;
         case "editado":
+            div.appendChild(buttonAddBaixado);
+            div.appendChild(buttonAddPostado);
             sectionEditados.appendChild(div);
             break;
         case "postado":
+            div.appendChild(buttonAddBaixado);
+            div.appendChild(buttonAddEditado);
             sectionPostados.appendChild(div);
             break;
         default:
@@ -66,12 +85,30 @@ async function addVideo() {
             },
             body: JSON.stringify({ link, descricao, estado }),
         });
+        if (response.ok) {
+            alert("Vídeo adicionado com sucesso!");
+            await fetchVideos();
+        }
+    } catch (error) {
+        console.error("Erro ao adicionar vídeo:", error);
+    }
+}
+
+async function moveVideoBy(id, estado) {
+    try {
+        const response = await fetch(`/videos/${id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ link, descricao, estado }),
+        });
         if (!response.ok) {
             const error = await response.json();
             alert("Erro: " + error.error);
         } else {
-            alert("Vídeo adicionado com sucesso!");
-            fetchVideos();
+            alert("Vídeo movido com sucesso!");
+            await fetchVideos();
         }
     } catch (error) {
         console.error("Erro ao adicionar vídeo:", error);

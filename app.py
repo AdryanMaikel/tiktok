@@ -51,9 +51,8 @@ def read_by_id(video_id):
 
 @app.route("/videos/<int:video_id>", methods=["PUT"])
 def update(video_id):
-    data = request.json
-    video = update_video(video_id, data.get("link"), data.get("descricao"),
-                         data.get("estado"))
+    estado = request.json.get("estado", "")
+    video = update_video(video_id, estado=estado)
     if not video:
         return jsonify({"error": "Vídeo não encontrado"}), 404
     return jsonify({

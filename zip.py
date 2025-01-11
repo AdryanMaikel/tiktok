@@ -34,5 +34,5 @@ def encontrar_e_extrair_zip(origem, destino):
 
 if __name__ == "__main__":
     origem = r"C:\Users\Adryan\Downloads"
-    destino = r"C:\Users\Adryan\Downloads\imagens"
+    destino = r"C:\Users\Adryan\Downloads\imagens\novas"
     encontrar_e_extrair_zip(origem, destino)
