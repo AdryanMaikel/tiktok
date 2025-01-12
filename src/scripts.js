@@ -6,21 +6,26 @@ function createCardVideo({ id, link, descricao, estado}) {
     const div = document.createElement("div");
     div.className = "card";
 
-    const inputLink = document.createElement("input");
-    inputLink.value = link;
-    inputLink.disabled = true;
-    div.appendChild(inputLink);
+    const buttonLink = document.createElement("button");
+    buttonLink.value = link;
+    buttonLink.innerText = link;
+    buttonLink.onclick = () => window.open(link);
+    // buttonLink.disabled = true;
+    div.appendChild(buttonLink);
     
     const textareaDescricao = document.createElement("textarea");
-    textareaDescricao.value = descricao;
+    textareaDescricao.innerText = descricao;
     textareaDescricao.disabled = true;
     div.appendChild(textareaDescricao);
-    
+
+    const divButtons = document.createElement("div");
+    divButtons.className = "buttons";
+
     const buttonDelete = document.createElement("button");
     buttonDelete.setAttribute("video-id", id);
     buttonDelete.innerText = "DELETAR"
     buttonDelete.onclick = deleteVideo;
-    div.appendChild(buttonDelete);
+    divButtons.appendChild(buttonDelete);
 
     const buttonAddBaixado = document.createElement("button");
     buttonAddBaixado.innerHTML = "Mover p/ Baixados";
@@ -34,21 +39,23 @@ function createCardVideo({ id, link, descricao, estado}) {
     buttonAddPostado.innerHTML = "Mover p/ Postados";
     buttonAddPostado.onclick = () => moveVideoBy(id, "postado");
 
-
     switch (estado) {
         case "baixado":
-            div.appendChild(buttonAddEditado);
-            div.appendChild(buttonAddPostado);
+            divButtons.appendChild(buttonAddEditado);
+            divButtons.appendChild(buttonAddPostado);
+            div.appendChild(divButtons);
             sectionBaixados.appendChild(div);
             break;
         case "editado":
-            div.appendChild(buttonAddBaixado);
-            div.appendChild(buttonAddPostado);
+            divButtons.appendChild(buttonAddBaixado);
+            divButtons.appendChild(buttonAddPostado);
+            div.appendChild(divButtons);
             sectionEditados.appendChild(div);
             break;
         case "postado":
-            div.appendChild(buttonAddBaixado);
-            div.appendChild(buttonAddEditado);
+            divButtons.appendChild(buttonAddBaixado);
+            divButtons.appendChild(buttonAddEditado);
+            div.appendChild(divButtons);
             sectionPostados.appendChild(div);
             break;
         default:

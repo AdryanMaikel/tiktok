@@ -1,0 +1,25 @@
+div.card {
+    width: min-content;
+    height: fit-content;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    padding: 5px;
+    border: 1px solid;
+    gap: 4px;
+    
+    textarea {
+        width: 415px;
+        height: 40px;
+        resize: none;
+        overflow-y: auto;
+    }
+
+    .buttons {
+        display: flex;
+    }
+    button {
+        width: fit-content;
+        /* float: left; */
+    }
+}

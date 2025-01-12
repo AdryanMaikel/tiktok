@@ -17,7 +17,9 @@ Base.metadata.create_all(engine_videos)
 Session = sessionmaker(bind=engine_videos)
 
 
-def create_video(link, descricao, estado):
+def create_video(link: str, descricao, estado):
+    if link.__contains__("?"):
+        link = link.split("?")[0]
     with Session() as session:
         video = Video(link=link, descricao=descricao, estado=estado)
         session.add(video)
